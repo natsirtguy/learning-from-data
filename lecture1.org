@@ -1,0 +1,163 @@
+The Learning Problem
+* Examples
+** Rate movies
+** Small improvements can be leveraged, big returns
+** Necessary:
+   * Pattern exists: related to how other people rate, etc.
+   * Hard to pin down mathematically
+   * Need data
+** Model
+*** Viewer is vector of factors
+    Comedy, action, block buster, Tom Cruise
+*** Not really machine learning
+    Want the machine to figure this out on its own, without creating
+    the model by hand
+*** Reverse engineer the process
+    Take the ratings and reverse engineer the viewer and movie "inner
+    product"
+**** Start random, nudge values in inner product until it works
+* Components
+** Credit approval example
+   Bank wants to decide if you are credit-worthy
+*** Use historical data, reverse engineer
+*** No guarantee that input are related
+*** Input x is customer application
+    Capital N points
+*** Output y is extend/don't extend credit, binary
+*** Target function f:x->y
+    Ideal credit approval formula, need to learn approximation
+*** Data
+    Previous applications, and then how they did in hindsight
+*** Hypothesis
+    g is created, our approximation
+*** Learning algorithm takes examples, produces hypothesis
+*** Hypothesis set
+    Set of choices for the hypothesis, learning algorithm picks from
+    this set
+**** No downside
+     Already dictating a set of hypothesis, can always just set this
+     to "everything"
+**** Upside
+     Useful for making the theory go through
+     My note: Also, you don't know what you are missing, impossible to
+     iterate over the entire space of functions, uncountable...
+*** Solution components are both hypothesis set and learning algorithm
+    * H = {h}, g \element H is the particular choice
+      * Perceptron model, perceptron learning algo
+	Neural network, backpropagation
+	SVM, quadratic programming
+    * Together, learning model
+* Simple model: Perceptron model
+** Input: attributes of customer
+** Approve if sum of weights times attributes > threshold
+   Simple, linear (that's what makes it perceptron)
+** h(x) = sign((sum of weights times attributes) - threshold)
+   weights and threshold define h, the elements of hypothesis set
+** Assume linearly separable
+   Can make a line which separates into regions
+*** Codimension-1 hyperplane is probably what he means by line
+** Artificial coordinate: x0=1, with w0 constrained to be -threshold
+   Nice vector form: h(x) = sign(w*x)
+** Algorithm: the perceptron learning model
+*** Given training set, pick misclassified point (customer)
+    sign(w*xn) \ne yn, yn is the binary "correct choice"
+*** Update the weight vector so it does better
+    w <- w + yn*xn
+*** Picture:
+    * If misclassified, w*x is +1 and should be -1 or vice versa
+    * Therefore if w ~ || x, we get a +1, need to push w away from x
+    * If w ~ || -x, get -1, need to push w towards x
+    * This formula does this exactly
+*** If we only take one point at a time, can mess up other points 
+*** If linearly separable, it will work anyway!
+*** Might be slow though
+*** All you do is that you match the previous customers
+* Types
+** Basic premise of learning
+   * Use observations to uncover underlying process (target function)
+   * Statistics: find pdf from samples, etc
+** Different types
+   When a given set of assumptions, gets called a different type once
+   the theory, mathematics become sufficiently different to "have a
+   life of their own"
+** Supervised learning
+*** Past input and output explicitly given
+*** Example: Coin recognition
+    * Measure size and mass
+    * Training data because grouped for you, told what coin is what in
+      old data
+    * Make some separator lines, etc
+** Unsupervised learning
+*** Instead of (input, correct output) get (input, ?)
+    * Somehow need to determine how to group
+    * Not told what the coins are, just some clustering shows up
+    * Unlabeled data can still be useful
+    * Number of clusters can be ambiguous
+    * Just call different groups, find single example to set
+      categories
+    * Another example: Portuguese on the radio, no translation, but
+      your brain begins to construct a model already
+** Reinforcement learning
+*** (input, some output, grade for this output)
+    * Tells you how well that output works
+    * Similar to real life experience: don't touch steaming pots,
+      sample sometimes and get burned
+    * Games are a good example
+      * Computer chooses crazy move
+      * Propagate back (with tricky formula) and find what move made
+        the mistake
+** Too good to be true?
+* Puzzle
+** Supervised: given training set, test set unlabeled
+** He gives an example: 3x3 box, with black/white boxes, find it
+** Can get both answers: This is an impossible task
+*** The target function is still literally unknown
+*** Despite this, learning can be useful
+* Q&A
+** How do you know if linearly separable?
+   Generally, you should just assume that it is not
+*** Doesn't work well at all in not linearly separable data
+*** Becomes very bad for large data sets
+** How do we know if there is a pattern? 
+*** Sometimes you can tell via the algorithm
+*** It can be bad to look at the data sometimes
+*** Can't look at the particular data set
+*** Only the known general features
+** Relation to statistics
+*** Point is to make assumptions in order to make statements
+*** Machine learning is willing to be less precise with assumptions
+    So that can apply to more "real-world" situations
+** Global or local optimization?
+*** Not studied for its own sake
+*** Makes sense
+** Hypothesis set continuous?
+*** Whatever you want
+*** Can find cases where you can still do better
+** Sampling bias in credit
+*** How do we know whether we should have rejected?
+    Data is not completely represented, but can find ways to make it
+    work.
+** How much data?
+*** The theory will explain mathematically
+*** In practice, not in your control
+    Need to work with what you've got.
+** Size of hypothesis set
+*** Big or small?
+*** Big can just end up memorizing
+** Bottleneck for performance is really the ability to generalize
+** Many different outputs allowed, not just binary
+** How do we choose hypothesis set, learning algorithm?
+*** The algorithm is usual just minimizing the error function
+    Just find the best choice...
+** What if exactly zero in perceptron?
+*** Purely technical
+** Are there problems we can't learn about?
+   Yes, if there is no pattern!
+** Perceptron related to neuron?
+*** Fire or not fire, that's it
+*** Will be discussed in neural net
+** Bayesian school:
+*** They put this Bayesian point of view, very different point of view
+
+
+#  LocalWords:  xn yn

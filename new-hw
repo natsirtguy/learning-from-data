@@ -1,0 +1,27 @@
+#!/bin/bash
+# Start new homework
+
+n=$1
+d="hw$1"
+
+mkdir $d
+mkdir "$d/$d"
+cp templates/hw-template.tex "$d/$d.tex"
+cp templates/hw-template.ipynb "$d/$d.ipynb"
+
+# Set up Python package
+touch "$d/$d/__init__.py"
+cp templates/hw-template.py "$d/$d/__main__.py"
+mkdir "$d/$d/tests"
+touch "$d/$d/tests/__init__.py"
+
+# Create org document
+echo "* [[docview:${d}-statement.pdf::1][Homework]]
+* [[file:$d.tex][LaTeX]]
+* [[docview:$d.pdf::1][Solutions]]
+* [[file:hw1/__main__.py][Python]]
+* [[file:$d.py][$d.py]]" > "$d/$d.org"
+
+# Retrieve homework
+cd $d
+wget -O "${d}-statement.pdf" "https://work.caltech.edu/homework/${d}.pdf"

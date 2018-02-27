@@ -1,0 +1,7 @@
+* [[docview:hw1-statement.pdf::1][Homework]]
+* [[file:hw1.tex::\\begin{document}][LaTeX]]
+* [[docview:hw1.pdf::1][Solutions]]
+* [[file:hw1/__main__.py][Python]]
+* [[file:~/brain/learning-from-data/lecture1.org][Lecture 1]]
+* [[file:~/brain/learning-from-data/lecture2.org][Lecture 2]]
+

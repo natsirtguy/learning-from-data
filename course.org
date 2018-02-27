@@ -1,0 +1,7 @@
+Learning from Data
+[[https://work.caltech.edu/telecourse.html][Course website]]
+* Lectures
+** [[file:lecture1.org][1: The Learning Problem]]
+** [[file:lecture2.org][2: Is Learning Feasible?]]
+* Homework
+** [[file:hw1/hw1.org::*%5B%5Bdocview:hw1-statement.pdf::1%5D%5BHomework%5D%5D][1]]

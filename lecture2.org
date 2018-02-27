@@ -1,0 +1,78 @@
+Is Learning Feasible?
+* Can we say something outside our given data? Probability
+** Example:
+*** Bin with red and green marbles
+*** mu is prob of red marbles
+*** mu unknown
+*** Pick N marbles
+*** Call nu fraction in sample
+*** Does nu tell us about mu?
+**** Sort answer: no
+**** Could be mostly green sample...
+**** Long answer: yes
+**** Of course, for large sample, nu should be similar to mu
+**** Say that nu is close to mu within mu
+** P[|nu - mu| > epsilon] \le 2 exp(-2 epsilon^2 N) 
+*** Called Hoeffding's Inequality
+*** mu = nu is probably approximately correct (PAC)
+*** One form of law of large numbers
+*** Note that bound does not depend on mu
+*** Tradeoff: N vs. epsilon
+*** We use nu to find mu, inverting logic
+** Connection to learning
+*** What to find unknown function, unlike just mu
+*** Metaphor
+    * Bin is space of input
+    * Marbles are input
+    * Green color corresponds to the hypothesis getting the right
+      answer, h(x) = f(x)
+    * Red is not matching
+*** Probability added to machinery of learning
+**** Add some probability distribution
+     This generates the input points x
+*** We've only talked about verification so far, not learning
+*** Learning then requires choosing various different h's
+*** Take multiple bins, with different h's
+*** Color of balls changes over hypothesis
+*** Find the good bin
+** Definitions
+*** mu and nu depend on h
+*** nu is in sample; E_in(h), error in sample
+*** mu is out of sample; E_out(h), error out of sample
+*** Hoeffding, again:
+    P[|E_in(h) - E_out(h)| > epsilon] \le 2 exp(-2 epsilon^2 N)
+** Problem: Hoeffding doesn't apply for multiple bins
+*** Think about coins:
+    Just because we have 5 heads in a row doesn't mean we have a
+    biased coin.
+*** Problem is that something bad will happen somewhere
+    Even though Hoeffding holds for each one, the probability that one
+    out of many will give good results is of course much higher
+*** Solution:
+    * P[|E_in(g) - E_out(g)| > epsilon]
+      \le P[|E_in(h1) - E_out(h1)| > epsilon or h2 ... or hM]
+    * Union bound: just sum, get 2 M exp(-2 epsilon^2 N)
+    * Very weak bound, because we ignore overlap
+    * M is the number of hypotheses we test
+    * This is the way to lose the link between in and out of sample
+    * More sophisticated models do worse because they imply a larger
+      number of hypotheses
+* Q&A
+** M is generally infinite now, but we will generalize it
+** Model captures multiple hypotheses; h is the hypothesis, H is the "model"
+** What if not binary?
+*** Instead, think of expected value vs. the sample average for mu, nu
+*** Variance turns matters in this case
+** Learning means iterating over different hypotheses
+   That's why there are multiple bins
+** How do we deal with many perfect solutions?
+   * Example is perceptron with many choices
+   * Turns out there are ways to choose one which is more likely to
+     generalize
+** Need to consider all possible h in union bound of Hoeffding
+*** Not just the ones that you visit in algorithm
+** Hoeffding is related to P-value
+*** General group of results for law of large numbers
+*** Not important for this course
+
+#  LocalWords:  nu le exp Hoeffding's Hoeffding
